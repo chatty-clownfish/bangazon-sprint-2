@@ -8,12 +8,17 @@ from website.forms import UserForm, ProductForm
 from website.models import Product
 from django.db import connection
 
+@login_required
 def profileList(request):
 
 
     with connection.cursor() as cursor:
         try:
-            cursor.execute("SELECT * FROM auth_user WHERE id = 1")
+            cursor.execute('''
+                            SELECT * FROM auth_user AS a 
+                            JOIN website_customer AS c ON a.id  = c.user_id
+                            WHERE a.id = %s
+                            ''', [request.user.id])
 
             columns= [col[0] for col in cursor.description]
             print(columns)  
