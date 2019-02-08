@@ -1,2 +1,13 @@
-<h1>Hello</h1>
-<p> Daniel is lord of the product detail.</p>
+{% load static %}
+
+{% include "navbar.html" %}
+
+{%block content%}
+<h1> DAYUMMMM</h1>
+<h2>{{website_products.title}}</h2>
+<p> Price: {{website_products.price}}}</p>
+<p> quantity: {{website_products.quantity}}}</p>
+
+<p> Description: {{website_products.description}}}</p>
+
+{%endblock%}
