@@ -2,6 +2,15 @@
 
 {% block content %}
 
-    <h1>Hello, {{profile.first_name}}, welcome to your profile</h1>
+<h1>Hello, {{profile.first_name}}, welcome to your profile</h1>
+
+<h3>Profile Information</h3>
+<ul>
+    <li>First Name: {{profile.first_name}}</li>
+    <li>Last Name: {{profile.last_name</li>
+        <!-- These will come from the customer table -->
+    <!-- <li>Address:</li>
+    <li>Phone Number:</li> -->
+</ul>
 
 {% endblock content %}
