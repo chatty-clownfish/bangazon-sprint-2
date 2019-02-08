@@ -1,0 +1,17 @@
+{% load static %}
+
+{% include "navbar.html" %}
+
+{%block content%}
+<h1>{{product_details.name}}</h1>
+<h2>{{product_details.title}}</h2>
+<p> Price: {{product_details.price}}</p>
+<p> quantity: {{product_details.quantity}}</p>
+<p> Description: {{product_details.description}}</p>
+<div>
+    <form action="/website/checkout" method='get'>
+      <input type="submit" value="add to order">
+    </form>
+</div>
+
+{%endblock%}
