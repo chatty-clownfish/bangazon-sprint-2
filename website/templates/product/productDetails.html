@@ -3,11 +3,11 @@
 {% include "navbar.html" %}
 
 {%block content%}
-<h1> DAYUMMMM</h1>
-<h2>{{website_products.title}}</h2>
-<p> Price: {{website_products.price}}}</p>
-<p> quantity: {{website_products.quantity}}}</p>
+<h1>{{product_details.name}}</h1>
+<h2>{{product_details.title}}</h2>
+<p> Price: {{product_details.price}}</p>
+<p> quantity: {{product_details.quantity}}</p>
 
-<p> Description: {{website_products.description}}}</p>
+<p> Description: {{product_details.description}}</p>
 
 {%endblock%}

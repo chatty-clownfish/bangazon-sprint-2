@@ -10,7 +10,7 @@ from website.models import Product
 # Then user will be shows the product detail page containing
 # title, description, quantity available, price/unit, and a button labeled Add to Order
 
-def product_details(request, product_id ):
-  product_details = get_object_or_404(Product, pk=product_id)
-  context = { 'product_details' : product_details}
+def product_details(request,id ):
+  product_details = get_object_or_404(Product, pk=id)
+  context = {'product_details' : product_details}
   return render(request, 'product/productDetails.html', context)
