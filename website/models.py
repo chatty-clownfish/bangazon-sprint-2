@@ -8,10 +8,10 @@ class Customer(models.Model):
         Methods:
             __str__ -- user
     '''
-    user = models.ForeignKey(User, on_delete=models.PROTECT)
     address = models.CharField(max_length=200)
     phoneNumber = models.CharField(max_length=12)
     deletedOn = models.DateField(default=None)
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
 
     def __str__(self):
         ''' returns a string representation of the model '''
@@ -39,13 +39,13 @@ class Product(models.Model):
         Methods:
             __str__ -- title
     '''
-    customer = models.ForeignKey(Customer, on_delete=models.PROTECT)
-    productType = models.ForeignKey(ProductType, on_delete=models.PROTECT)
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     price = models.IntegerField()
     quantity = models.IntegerField()
     deletedOn = models.DateField(default=None)
+    customer = models.ForeignKey(Customer, on_delete=models.PROTECT)
+    productType = models.ForeignKey(ProductType, on_delete=models.PROTECT)
 
     def __str__(self):
         ''' returns a string representation of the model '''
@@ -63,8 +63,8 @@ class PaymentType(models.Model):
     '''
     name = models.CharField(max_length=50)
     accountNumber = models.IntegerField()
-    customer = models.ForeignKey(Customer, on_delete=models.PROTECT)
     deletedOn = models.DateField(default=None)
+    customer = models.ForeignKey(Customer, on_delete=models.PROTECT)
 
     def __str__(self):
         ''' returns a string representation of the model '''
@@ -79,12 +79,12 @@ class Order(models.Model):
         Methods:
             __str__ -- id
     '''
+    isCompleted = models.BooleanField(default=False)
+    deletedOn = models.DateField(default=None)
     customer = models.ForeignKey(Customer, on_delete=models.PROTECT)
     paymentType = models.ForeignKey(PaymentType, on_delete=models.PROTECT)
-    isCompleted = models.BooleanField(default=False)
     product = models.ManyToManyField(
         Product, blank=True, through='ProductOrder')
-    deletedOn = models.DateField(default=None)
 
     def __str__(self):
         ''' returns a string representation of the model '''
@@ -97,9 +97,9 @@ class ProductOrder(models.Model):
         Methods:
             __str__ -- order, product
     '''
+    deletedOn = models.DateField(default=None)
     order = models.ForeignKey(Order, on_delete=models.PROTECT)
     product = models.ForeignKey(Product, on_delete=models.PROTECT)
-    deletedOn = models.DateField(default=None)
 
     def __str__(self):
         ''' returns a string representation of the model '''
