@@ -5,9 +5,11 @@
   <form action="/" method='get'>
     <input type="submit" value="Home">
   </form>
+  {% if user.is_authenticated %}
   <form action="/products" method='get'>
     <input type="submit" value="My Products">
   </form>
+  {% endif %}
   <form action="/cart" method='get'>
     <input type="submit" value="Cart">
   </form>
