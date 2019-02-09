@@ -1,0 +1,30 @@
+
+    <ul>
+        {% for type in product_type %}
+
+            <h2> {{type.name}} </h2>
+
+            {% for tacos in list_of_products %}    
+
+                {% for product in tacos %}
+
+                    {% if product.productType_id == type.id %}
+
+                        <li>
+                            {{product.title}}
+                        </li>
+                    
+                    {% endif %}
+
+                {% endfor %}
+
+            {% endfor %}
+
+        {% endfor %}
+    </ul>
+</div>
+
+
+
+
+
