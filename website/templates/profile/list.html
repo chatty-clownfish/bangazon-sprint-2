@@ -1,0 +1,26 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<h1>Hello, {{profile.first_name}}. Welcome to your profile</h1>
+
+<h3>Profile Information</h3>
+    <ul>
+        <li>First Name: {{profile.first_name}}</li>
+        <li>Last Name: {{profile.last_name}}</li>
+            <!-- These will come from the customer table -->
+        <li>Address: {{profile.address}}</li>
+        <li>Phone Number: {{profile.phoneNumber}}</li>
+    </ul>
+
+<h3>Payment Options</h3>
+<!-- Will be coming from the paymenttype table -->
+    <ul>
+        <li>Payment Type Name: {{profile.name}}</li>
+        <li>Account Number: {{profile.accountNumber}}</li>
+    </ul>
+
+    <!-- there will be a button to link to the add_payment page -->
+
+
+{% endblock content %}
