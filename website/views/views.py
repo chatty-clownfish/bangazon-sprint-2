@@ -118,6 +118,11 @@ def list_products(request):
 
 # need to specify producttype id
 def products_by_type(request, pk):
+    '''
+    This method gets one individual producttype and lists it along with all associated products by name, quantity and price.
+
+    Method uses a SELECT from the product table and JOIN with the producttype table.
+    '''
     try:
 
         sql = '''
