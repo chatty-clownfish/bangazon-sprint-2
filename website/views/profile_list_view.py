@@ -22,19 +22,19 @@ def profileList(request):
                             ''', [request.user.id])
 
             columns= [col[0] for col in cursor.description]
-            print(columns)  
+            # print(columns)  
 
             profile = dict()
 
             for row in cursor.fetchall():
-                print(row)
+                print("THIS IS THE ROW:", row)
                 to_add = dict(zip(columns, row))
                 profile.update(to_add)
 
         except connection.OperationalError as err:
             print("Error...", err)
     
-    print(profile)
+    print("CHECK THIS:", profile)
     context = {"profile": profile}
 
     return render(request, 'profile/list.html', context)
