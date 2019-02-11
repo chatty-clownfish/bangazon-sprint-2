@@ -90,34 +90,36 @@ def user_logout(request):
     # in the URL in redirects?????
     return HttpResponseRedirect('/')
 
-
-def sell_product(request):
-    if request.method == 'GET':
-        product_form = ProductForm()
-        template_name = 'product/create.html'
-        return render(request, template_name, {'product_form': product_form})
-
-    elif request.method == 'POST':
-        form_data = request.POST
-
-        p = Product(
-            seller = request.user,
-            title = form_data['title'],
-            description = form_data['description'],
-            price = form_data['price'],
-            quantity = form_data['quantity'],
-        )
-        p.save()
-        template_name = 'product/success.html'
-        return render(request, template_name, {})
-
 def list_products(request):
-    all_products = Product.objects.all()
+    user_id = request.user.id
+    all_products = Product.objects.raw('''select * from website_product
+where customer_id = %s ''', [user_id] )
     template_name = 'product/list.html'
     return render(request, template_name, {'products': all_products})
 
 
+def products_by_type(request, pk):
+    '''
+    This method gets one individual producttype and lists it along with all associated products by name, quantity and price.
 
+    Method uses a SELECT from the product table and JOIN with the producttype table.
+    '''
+    try:
+
+        sql = '''
+        SELECT p.title, p.quantity, p.price, pt.name, pt.id, p.id
+        FROM website_product p
+        JOIN website_producttype pt on pt.id = p.productType_id
+        WHERE pt.id=%s
+        '''
+        product_type = ProductType.objects.raw(sql, [pk])[0]
+        product = Product.objects.raw(sql, [pk])
+
+    except ProductType.DoesNotExist:
+        raise Http404("Song does not exist")
+
+    context = {'type': product_type, 'prod':product}
+    return render(request, 'product/products_by_type.html', context)
 
 
 

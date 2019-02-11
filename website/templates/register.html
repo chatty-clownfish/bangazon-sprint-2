@@ -11,7 +11,7 @@
         <strong>Thank you for registering!</strong>
         <a href="{% url 'website:index' %}">Return to the homepage.</a><br />
         {% else %}
-        <strong>Register here!</strong><br />
+        <strong>Register here!</strong><br/>
 
         <form id="user_form" method="post" action="{% url 'website:register' %}"
                 enctype="multipart/form-data">
