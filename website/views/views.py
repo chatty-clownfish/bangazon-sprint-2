@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.template import RequestContext
 
 from website.forms import UserForm, ProductForm
-from website.models import Product
+from website.models import Product, ProductType
 
 def index(request):
     template_name = 'index.html'
@@ -116,8 +116,21 @@ def list_products(request):
     template_name = 'product/list.html'
     return render(request, template_name, {'products': all_products})
 
+# need to specify producttype id
+def products_by_type(request, pk):
+    try:
 
+        sql = '''
+        SELECT p.title, p.quantity, p.price, pt.name, pt.id, p.id
+        FROM website_product p
+        JOIN website_producttype pt on pt.id = p.productType_id
+        WHERE pt.id=%s
+        '''
+        product_type = ProductType.objects.raw(sql, [pk])[0]
+        product = Product.objects.raw(sql, [pk])
 
+    except ProductType.DoesNotExist:
+        raise Http404("Song does not exist")
 
-
-
+    context = {'type': product_type, 'prod':product}
+    return render(request, 'product/products_by_type.html', context)
