@@ -1,6 +1,5 @@
 from django.conf.urls import url
 from django.urls import path
-
 from . import views
 from .views.product_detail_views import product_details
 
@@ -13,6 +12,7 @@ urlpatterns = [
     url(r'^sell$', views.sell_product, name='sell'),
     url(r'^products$', views.list_products, name='list_products'),
     path('profile/', views.profileList, name='profile'),
+    path('producttype/<int:pk>/', views.products_by_type, name='products_by_type'),
     path('products/<int:id>/', product_details, name='product_detail'),
     # url(r'^cart$', views.list_cart, name='cart'),
 ]

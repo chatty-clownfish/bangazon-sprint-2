@@ -1,4 +1,4 @@
-from .views import index, register, login_user, user_logout,list_products
+from .views import index, register, login_user, user_logout, list_products, products_by_type
 
 from .profile_list_view import *
 from .product_category_view import sell_product
