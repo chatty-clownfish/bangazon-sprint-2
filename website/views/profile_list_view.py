@@ -17,6 +17,7 @@ def profileList(request):
             cursor.execute('''
                             SELECT * FROM auth_user AS a 
                             JOIN website_customer AS c ON a.id  = c.user_id
+                            JOIN website_paymenttype as p ON a.id = p.customer_id
                             WHERE a.id = %s
                             ''', [request.user.id])
 
