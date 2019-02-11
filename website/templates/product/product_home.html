@@ -2,24 +2,20 @@
     <ul>
         {% for type in product_type %}
 
-            <h2> {{type.name}} </h2>
+            <h2> {{type.name}} (Total: {{type.product_set.all|length}})</h2>
 
-            {% for tacos in list_of_products %}    
-
-                {% for product in tacos %}
-
+            {% for products in list_of_products %}    
+                {% for product in products %}
                     {% if product.productType_id == type.id %}
-
-                        <li>
-                            {{product.title}}
-                        </li>
-                    
+            
+                    <a href="">
+                            <li>
+                                {{product.title}}
+                            </li>
+                        </a>        
                     {% endif %}
-
                 {% endfor %}
-
             {% endfor %}
-
         {% endfor %}
     </ul>
 </div>

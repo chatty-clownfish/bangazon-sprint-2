@@ -23,5 +23,5 @@ def productHomeView(request):
     except Product.DoesNotExist:
         raise Http404("Product does not exist")
 
-    context = {'product_list': all_products, 'product_type': product_type, 'list_of_products':list_of_products}
+    context = {'allProducts': all_products, 'product_type': product_type, 'list_of_products':list_of_products}
     return render(request, 'product/product_home.html', context)
