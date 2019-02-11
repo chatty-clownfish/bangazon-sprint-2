@@ -1,11 +1,11 @@
-{% extends 'base.html'  %}
+{% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
     <ul>
         {% for type in product_type %}
-            <a href="{% url 'website:products_by_type' producttype.id %}">
-            <h2> {{type.name}} </h2>
-            </a>
+            <h2><a href="{% url 'website:products_by_type' type.id %}">{{type.name}}</a></h2>
+
             <p>(Total: {{type.product_set.all|length}})</p>
             
 
@@ -13,7 +13,7 @@
                 {% for product in products %}
                     {% if product.productType_id == type.id %}
             
-                    <a href="">
+                    <a href="https://www.linkedin.com/in/samuel-webber-808476120/" target="_blank">
                             <li>
                                 {{product.title}}
                             </li>

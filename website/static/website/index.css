@@ -1,9 +1,13 @@
 nav {
-  display: flex;
-  flex-flow: row;
-  justify-content: flex-end;
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-end;
 }
 
 nav form:not(:last-child) {
-  margin-right: 8px
+    margin-right: 8px
+}
+
+li {
+    list-style: none;
 }
