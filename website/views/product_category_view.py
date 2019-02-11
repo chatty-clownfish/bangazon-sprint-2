@@ -17,15 +17,15 @@ def sell_product(request):
 
     if request.method == "POST":
         seller = request.user.id
-        title = request.POST["title"]
-        productType = request.POST["productType"]
-        description = request.POST["description"]
-        price = request.POST["price"]
+        title = request.POST["title"] 
+        productType = request.POST["productType"] 
+        description = request.POST["description"] 
+        price = request.POST["price"] 
         quantity = request.POST["quantity"]
 
     with connection.cursor() as cursor:
         cursor.execute("INSERT into website_product VALUES(%s, %s, %s, %s, %s, %s, %s, %s)", [None, title, description, price, quantity, None, seller, productType])
         return HttpResponseRedirect(reverse('website:index'))
 
-
+    
 

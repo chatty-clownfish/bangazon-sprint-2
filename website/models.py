@@ -11,7 +11,7 @@ class Customer(models.Model):
         Methods:
             __str__ -- user
     '''
-    user = models.ForeignKey(User, on_delete=models.PROTECT)
+    user = models.OneToOneField(User, on_delete=models.PROTECT)
     address = models.CharField(max_length= 200)
     phoneNumber = models.CharField(max_length= 12)
     deletedOn = models.DateField(default = None, null=True)
