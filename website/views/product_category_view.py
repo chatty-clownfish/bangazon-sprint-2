@@ -2,13 +2,15 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django.template import RequestContext
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
+
 
 from website.forms import UserForm, ProductForm
 from website.models import Product, ProductType
 
 from django.db import connection
 
-
+@login_required
 def sell_product(request):
     if request.method == 'GET':
         product_form = ProductForm()

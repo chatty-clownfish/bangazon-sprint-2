@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.template import RequestContext
 
 from website.forms import UserForm, ProductForm, CustomerForm
-from website.models import Product
+from website.models import Product, ProductType
 
 def index(request):
     template_name = 'index.html'
@@ -63,8 +63,10 @@ def login_user(request):
 
     # Obtain the context for the user's request.
     context = RequestContext(request)
+    next_route = {"next": request.GET.get('next', '/')}
 
     # If the request is a HTTP POST, try to pull out the relevant information.
+
     if request.method == 'POST':
 
         # Use the built-in authenticate method to verify
@@ -75,7 +77,7 @@ def login_user(request):
         # If authentication was successful, log the user in
         if authenticated_user is not None:
             login(request=request, user=authenticated_user)
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect(request.GET.get('next'))
 
         else:
             # Bad login details were provided. So we can't log the user in.
@@ -83,7 +85,7 @@ def login_user(request):
             return HttpResponse("Invalid login details supplied.")
 
 
-    return render(request, 'login.html', {}, context)
+    return render(request, 'login.html', next_route, context)
 
 # Use the login_required() decorator to ensure only those logged in can access the view.
 @login_required
@@ -120,8 +122,8 @@ def products_by_type(request, pk):
         product_type = ProductType.objects.raw(sql, [pk])[0]
         product = Product.objects.raw(sql, [pk])
 
-    except ProductType.DoesNotExist:
-        raise Http404("Song does not exist")
+    except IndexError:
+        raise Http404("This product type does not exist")
 
     context = {'type': product_type, 'prod':product}
     return render(request, 'product/products_by_type.html', context)

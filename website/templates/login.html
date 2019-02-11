@@ -7,7 +7,7 @@
     <body>
         <h1>Login to Bangazon</h1>
 
-        <form id="login_form" method="post" action="{% url 'website:login' %}">
+        <form id="login_form" method="post" action="/login?next={{next}}">
             {% csrf_token %}
             Username: <input type="text" name="username" value="" size="50" />
             <br />
@@ -16,6 +16,7 @@
 
             <input type="submit" value="submit" />
         </form>
+        <a href="{% url 'website:register' %}"><input type="submit" value="register a new account" /></a>
 
     </body>
 </html>
