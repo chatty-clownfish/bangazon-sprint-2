@@ -58,7 +58,7 @@ def login_user(request):
 
     # Obtain the context for the user's request.
     context = RequestContext(request)
-    next_route = {"next": request.GET['next']}
+    next_route = {"next": request.GET.get('next', '/')}
 
     # If the request is a HTTP POST, try to pull out the relevant information.
 
