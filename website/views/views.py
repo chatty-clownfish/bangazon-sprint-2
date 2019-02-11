@@ -114,8 +114,8 @@ def products_by_type(request, pk):
         product_type = ProductType.objects.raw(sql, [pk])[0]
         product = Product.objects.raw(sql, [pk])
 
-    except ProductType.DoesNotExist:
-        raise Http404("Song does not exist")
+    except IndexError:
+        raise Http404("This product type does not exist")
 
     context = {'type': product_type, 'prod':product}
     return render(request, 'product/products_by_type.html', context)
