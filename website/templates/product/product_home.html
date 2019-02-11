@@ -1,0 +1,31 @@
+{% extends 'base.html'  %}
+
+{% block content %}
+    <ul>
+        {% for type in product_type %}
+
+            <h2> {{type.name}} (Total: {{type.product_set.all|length}})</h2>
+
+            {% for products in list_of_products %}    
+                {% for product in products %}
+                    {% if product.productType_id == type.id %}
+            
+                    <a href="">
+                            <li>
+                                {{product.title}}
+                            </li>
+                        </a>        
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock content %}
+
+
+
+
+
+
