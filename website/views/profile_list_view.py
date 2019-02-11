@@ -3,14 +3,15 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django.template import RequestContext
+from django.urls import reverse
 
-from website.forms import UserForm, ProductForm
+from website.forms import UserForm, ProductForm, AddPaymentForm
 from website.models import Product
+from django.contrib.auth.models import User
 from django.db import connection
 
 @login_required
 def profileList(request):
-
 
     with connection.cursor() as cursor:
         try:
@@ -35,6 +36,25 @@ def profileList(request):
             print("Error...", err)
     
     print("CHECK THIS:", profile)
+    
     context = {"profile": profile}
-
+    
     return render(request, 'profile/list.html', context)
+
+@login_required
+def addPayment(request):
+    
+    if request.method == 'GET':
+        payment_form = AddPaymentForm()
+        template_name = 'profile/add_payment.html'
+        return render(request, template_name, {'payment_form': payment_form})
+
+    
+    if request.method == "POST":
+        customer = request.user.id
+        name = request.POST["name"]
+        accountNumber = request.POST["accountNumber"]
+
+    with connection.cursor() as cursor:
+        cursor.execute("INSERT into website_paymenttype VALUES(%s, %s, %s, %s, %s)", [None, name, accountNumber, None, customer])
+        return HttpResponseRedirect(reverse('website:profile'))
