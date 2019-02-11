@@ -1,16 +1,20 @@
-{% extends 'base.html'  %}
+{% extends 'base.html' %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'website/index.css' %}" />
 
 {% block content %}
     <ul>
         {% for type in product_type %}
+            <h2><a href="{% url 'website:products_by_type' type.id %}">{{type.name}}</a></h2>
 
-            <h2> {{type.name}} (Total: {{type.product_set.all|length}})</h2>
+            <p>(Total: {{type.product_set.all|length}})</p>
+            
 
             {% for products in list_of_products %}    
                 {% for product in products %}
                     {% if product.productType_id == type.id %}
             
-                    <a href="">
+                    <a href="https://www.linkedin.com/in/samuel-webber-808476120/" target="_blank">
                             <li>
                                 {{product.title}}
                             </li>
