@@ -24,7 +24,10 @@
 
 <h3>Order History</h3>
 <!-- Still need to figure this portion out -->
-
-
+<ol>
+    {% for order in profile.website_order_set.all %}
+        <li>{{order.isCompleted}}</li>
+    {$ endfor %}
+</ol>
 
 {% endblock content %}
