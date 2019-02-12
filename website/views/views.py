@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django.template import RequestContext
 
-from website.forms import UserForm, ProductForm
+from website.forms import UserForm, ProductForm, CustomerForm
 from website.models import Product, ProductType
 
 def index(request):
@@ -28,10 +28,14 @@ def register(request):
     # on Django's built-in User model
     if request.method == 'POST':
         user_form = UserForm(data=request.POST)
+        customer_form = CustomerForm(data=request.POST)
 
-        if user_form.is_valid():
+        if user_form.is_valid() and customer_form.is_valid():
             # Save the user's form data to the database.
             user = user_form.save()
+            customer = customer_form.save(commit=False)
+            customer.user = user
+            customer.save()
 
             # Now we hash the password with the set_password method.
             # Once hashed, we can update the user object.
@@ -45,8 +49,9 @@ def register(request):
 
     elif request.method == 'GET':
         user_form = UserForm()
+        customer_form = CustomerForm()
         template_name = 'register.html'
-        return render(request, template_name, {'user_form': user_form})
+        return render(request, template_name, {'user_form': user_form, 'customer_form': customer_form})
 
 
 def login_user(request):
@@ -72,7 +77,7 @@ def login_user(request):
         # If authentication was successful, log the user in
         if authenticated_user is not None:
             login(request=request, user=authenticated_user)
-            return HttpResponseRedirect(request.GET.get('next'))
+            return HttpResponseRedirect(request.GET.get('next', '/'))
 
         else:
             # Bad login details were provided. So we can't log the user in.
