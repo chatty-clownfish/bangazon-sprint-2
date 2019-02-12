@@ -1,9 +1,7 @@
 {% extends 'base.html'  %}
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'website/index.css' %}" />
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css">
 
 {% block content %}
+
     <div class="producttype_container">
         <h1>{{ type.name }}</h1><br />
         {% for p in prod %}
