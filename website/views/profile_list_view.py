@@ -39,6 +39,7 @@ def profileList(request):
                                                 WHERE p.customer_id == %s
                                                 ''', [customerId])[0]
                 print("SQLLLLLL", sql)
+                print(sql.accountNumber)
             except:
                 sql = ""                                         
         except connection.OperationalError as err:
