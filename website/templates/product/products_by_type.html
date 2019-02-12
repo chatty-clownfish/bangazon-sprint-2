@@ -1,10 +1,14 @@
 {% extends 'base.html'  %}
 
 {% block content %}
-    <h1>{{ type.name }}</h1>
-    {% for p in prod %}
-    <h3>{{ p.title }}</h3>
-    <p>In stock: {{ p.quantity }}</p>
-    <p>Price: {{ p.price }}</p>
-    {% endfor %}
+
+    <div class="producttype_container">
+        <h1>{{ type.name }}</h1><br />
+        {% for product in prod %}
+        <h5><a href="{% url 'website:product_detail' product.id %}">{{ product.title }}</a></h5>
+        <p>${{ product.price }}<br />
+        {{ product.quantity }} left in stock</p>
+        {% endfor %}
+    </div>
+
 {% endblock %}
