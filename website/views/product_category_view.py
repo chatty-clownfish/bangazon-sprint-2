@@ -1,5 +1,5 @@
 from django.http import HttpResponse, HttpResponseRedirect, Http404
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.template import RequestContext
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
@@ -25,9 +25,12 @@ def sell_product(request):
         price = request.POST["price"] 
         quantity = request.POST["quantity"]
 
-    with connection.cursor() as cursor:
-        cursor.execute("INSERT into website_product VALUES(%s, %s, %s, %s, %s, %s, %s, %s)", [None, title, description, price, quantity, None, seller, productType])
-        return HttpResponseRedirect(reverse('website:index'))
+        with connection.cursor() as cursor:
+            cursor.execute("INSERT into website_product VALUES(%s, %s, %s, %s, %s, %s, %s, %s)", [None, title, description, price, quantity, None, seller, productType])
+            product_details = cursor.lastrowid
+
+    return HttpResponseRedirect(reverse("website:product_detail", args=(product_details,)))
+        
 
     
 
