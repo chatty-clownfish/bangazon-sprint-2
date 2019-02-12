@@ -12,13 +12,13 @@ def products_by_type(request, pk):
     try:
 
         sql = '''
-        SELECT p.title, p.quantity, p.price, pt.name, pt.id, p.id
+        SELECT p.title, p.quantity, p.price, pt.name, pt.id as "productTypeId", p.id
         FROM website_product p
         JOIN website_producttype pt on pt.id = p.productType_id
         WHERE pt.id=%s
         '''
-        product_type = ProductType.objects.raw(sql, [pk])[0]
-        product = Product.objects.raw(sql, [pk])
+        product_type = ProductType.objects.raw(sql, [pk,])[0]
+        product = Product.objects.raw(sql, [pk,])
 
     except IndexError:
         raise Http404("This product type does not exist")
