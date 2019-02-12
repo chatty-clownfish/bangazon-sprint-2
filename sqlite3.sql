@@ -47,9 +47,9 @@ INSERT INTO website_producttype VALUES (null, "Electronics", null);
 INSERT INTO website_producttype VALUES (null, "Appliances", null);
 INSERT INTO website_producttype VALUES (null, "Furniture", null);
 
-INSERT INTO website_customer VALUES (null, '123 Sesame Street', '615-938-3032', null, 2);
-INSERT INTO website_customer VALUES (null, '4444 magnolia Street', '901-858-0122', null, 3);
-INSERT INTO website_customer VALUES (null, '615 Acorn Avenue', '422-758-2311', null, 4);
+INSERT INTO website_customer VALUES (null, '123 Sesame Street', '615-938-3032', null, 1);
+INSERT INTO website_customer VALUES (null, '4444 magnolia Street', '901-858-0122', null, 2);
+INSERT INTO website_customer VALUES (null, '615 Acorn Avenue', '422-758-2311', null, 3);
 
 INSERT INTO website_order VALUES (null, 0, null, 1, 1);
 INSERT INTO website_order VALUES (null, 0, null, 2, 2);
