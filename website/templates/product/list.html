@@ -12,7 +12,10 @@
 
     <ol>
     {% for product in products %}
-        <li><a href="{% url 'website:product_detail' product.id %}">{{ product.title }}</a> <a href="">(DELETE)</a>   </li>
+    {% if product.deletedOn is None %}
+        <li><a href="{% url 'website:product_detail' product.id %}">{{ product.title }}</a> 
+            <a href="{% url 'website:deleteProduct' product.id%}">(DELETE)</a>   </li>
+    {% endif %}
     {% endfor %}
     </ol>
   </body>
