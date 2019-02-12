@@ -77,7 +77,7 @@ def login_user(request):
         # If authentication was successful, log the user in
         if authenticated_user is not None:
             login(request=request, user=authenticated_user)
-            return HttpResponseRedirect(request.GET.get('next'))
+            return HttpResponseRedirect(request.GET.get('next', '/'))
 
         else:
             # Bad login details were provided. So we can't log the user in.
