@@ -15,13 +15,16 @@
 
 <h3>Payment Options</h3>
 <!-- Will be coming from the paymenttype table -->
+{% if sql.accountNumber %}
 <p>***will need to come back loop over payment types***</p>
     <ul>
-        <li>Payment name: {{profile.name}}</li>
-        <li>Account Number: {{profile.accountNumber}}</li>
+        <li>Payment name: {{sql.name}}</li>
+        <li>Account Number: {{sql.accountNumber}}</li>
     </ul>
 
     <!-- there will be a button to link to the add_payment page -->
-<a href="{% url 'website:add_payment' %}"><button type="button" class="btn btn-info mt-3">Add Payment</button></a>
-
+    <a href="{% url 'website:add_payment' %}"><button type="button" class="btn btn-success mt-3">Add Payment</button></a>
+{% else %}
+    <a href="{% url 'website:add_payment' %}"><button type="button" class="btn btn-success mt-3">Add Payment</button></a>
+{% endif %}
 {% endblock content %}
