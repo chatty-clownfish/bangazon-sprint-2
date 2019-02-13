@@ -4,6 +4,7 @@ from . import views
 from .views.product_detail_views import product_details
 from .views.cart_views import delete_cart
 from .views.deleteProduct import deleteProduct
+from .views.product_detail_views import add_product_to_cart
 
 app_name = "website"
 urlpatterns = [
@@ -21,4 +22,5 @@ urlpatterns = [
     path('cart/', views.list_cart, name='cart'),
     path('cart_views/<int:order_id>/<int:product_id>', views.delete_cart, name='cart_views'),
     path('deleteProduct/<int:product_id>', views.deleteProduct, name='deleteProduct'),
+    path('addProduct/<int:product_details>', views.add_product_to_cart, name='addProduct'),
     ]
