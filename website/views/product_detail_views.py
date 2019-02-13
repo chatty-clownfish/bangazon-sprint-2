@@ -14,9 +14,10 @@ from django.db import connection
 # title, description, quantity available, price/unit, and a button labeled Add to Order
 
 def product_details(request,id ):
-  product_details = get_object_or_404(Product, pk=id)
-  context = {'product_details' : product_details}
-  return render(request, 'product/productDetails.html', context)
+    user_id = request.user.id
+    product_details = get_object_or_404(Product, pk=id)
+    context = {'product_details' : product_details , 'user_id' : user_id}
+    return render(request, 'product/productDetails.html', context)
 
 
 def add_product_to_cart(request, product_details):
