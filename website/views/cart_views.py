@@ -29,4 +29,4 @@ def delete_cart(request, order_id, product_id):
         product_id = product_id
         cursor.execute("Update website_productorder SET deletedOn=%s WHERE order_id= %s AND product_id= %s ",[deletedOn, order_id, product_id])
 
-    return HttpResponseRedirect(reverse('website:index'))
+    return HttpResponseRedirect(reverse('website:cart'))

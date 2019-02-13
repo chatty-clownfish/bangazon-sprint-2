@@ -1,35 +1,29 @@
 {% extends 'base.html' %}
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'website/index.css' %}" />
 
 {% block content %}
-    <ul>
+
         {% for type in product_type %}
-            <h2><a href="{% url 'website:products_by_type' type.id %}">{{type.name}}</a></h2>
-
-            <p>(Total: {{type.product_set.all|length}})</p>
-            
-
-            {% for products in list_of_products %}    
-                {% for product in products %}
-                    {% if product.productType_id == type.id %}
-            
-                    <a href="https://www.linkedin.com/in/samuel-webber-808476120/" target="_blank">
-                            <li>
-                                {{product.title}}
-                            </li>
-                        </a>        
-                    {% endif %}
-                {% endfor %}
-            {% endfor %}
+            <div class="d-flex justify-content-center">
+                <div class="card border-dark text-dark m-4" style="width:80%">
+                    <h2 class="card-header text-center">{{type.name}} ({{type.product_set.all|length}})</h2>
+                    <div class="card-body">
+                    {% for products in list_of_products %}
+                        {% for product in products %}
+                            {% if product.productType_id == type.id %}
+                                <div class="d-flex justify-content-center">
+                                    <a href="{% url 'website:product_detail' product.id %}">
+                                        <p class="card-title text-dark">{{product.title}}</p>
+                                    </a>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+                <div class="d-flex justify-content-center mb-3">
+                        <a href="{% url 'website:products_by_type' type.id %}" class="btn btn-primary" role="button" style="width:175px">All {{type.name}}</a>
+                    </div>
+                </div>
+            </div>
         {% endfor %}
-    </ul>
-</div>
 
 {% endblock content %}
-
-
-
-
-
-

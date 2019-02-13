@@ -1,29 +1,36 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'website/index.css' %}" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css">
 
-<nav>
-  <form action="/home" method='get'>
-    <input type="submit" value="Home">
-  </form>
-  <form action="/sell" method='get'>
-    <input type="submit" value="Sell Product">
-  </form>
-  <form action="/products" method='get'>
-    <input type="submit" value="My Products">
-  </form>
-  <form action="/cart" method='get'>
-    <input type="submit" value="Cart">
-  </form>
-  <form action="/profile" method='get'>
-    <input type="submit" value="My Profile">
-  </form>
-  {% if user.is_authenticated %}
-  <form action="/logout" method='get'>
-    <input type="submit" value="Logout">
-  </form>
-  {% else %}
-  <form action="/login" method='get'>
-    <input type="submit" value="Login">
-  </form>
-  {% endif %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top mb-5">
+    <a class="navbar-brand ml-5" href="{% url 'website:product_home' %}">Bangazon</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto mr-5">
+        <li class="nav-item mr-2">
+            <a class="nav-link" href="{% url 'website:sell' %}">Sell Something</a>
+        </li>
+        <li class="nav-item mr-2">
+          <a class="nav-link" href="{% url 'website:list_products' %}">My Products</a>
+        </li>
+        <li class="nav-item mr-2">
+            <a class="nav-link" href="{% url 'website:profile' %}">My Profile</a>
+        </li>
+        <li class="nav-item mr-2">
+          <a class="nav-link" href="{% url 'website:cart' %}"><img src="{% static 'website/images/cart_icon.png' %}" width="20px" alt="Cart"></a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item mr-1 ml-4">
+          <a class="nav-link" href="{% url 'website:logout' %}">Logout</a>
+        </li>
+        {% else %}
+        <li class="nav-item mr-1 ml-4">
+          <a class="nav-link" href="{% url 'website:login' %}">Login</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
 </nav>
