@@ -2,21 +2,50 @@
 <html>
     <head>
         <title>Bangazon</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css">
     </head>
 
     <body>
-        <h1>Login to Bangazon</h1>
 
-        <form id="login_form" method="post" action="/login?next={{next}}">
-            {% csrf_token %}
-            Username: <input type="text" name="username" value="" size="50" />
-            <br />
-            Password: <input type="password" name="password" value="" size="50" />
-            <br />
+        <div class="mt-5 mb-5">
+            <div class="d-flex justify-content-center m-4 pt-2">
+                <h1>Login to Bangazon</h1>
+            </div>
 
-            <input type="submit" value="submit" />
-        </form>
-        <a href="{% url 'website:register' %}"><input type="submit" value="register a new account" /></a>
+            <form id="login_form" method="post" action="/login?next={{next}}" class="mx-auto" style="width:350px">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" />
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="login_password" name="password" />
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-success mt-3" value="submit">submit</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <a href="{% url 'website:register' %}"><button type="submit" class="btn btn-primary" value="register a new account">create a new account</button></a>
+        </div>
 
     </body>
 </html>
+
+
+
+
+<!-- 
+  <form id="login_form" method="post" action="/login?next={{next}}">
+    {% csrf_token %}
+    Username: <input type="text" name="username" value="" size="50" />
+    <br />
+    Password: <input type="password" name="password" value="" size="50" />
+    <br />
+
+    <input type="submit" value="submit" />
+</form>
+<a href="{% url 'website:register' %}"><input type="submit" value="register a new account" /></a> -->
