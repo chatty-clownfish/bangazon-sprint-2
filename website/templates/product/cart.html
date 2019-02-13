@@ -5,7 +5,6 @@
 {% if order.deletedOn is None %}
 {% for item in cart_items %}
 {% if item.deletedOn is None %}
-<p>{{order.id}}</p>
 <a><h3>Item: {{item.product.title}}</h3></a>
 <p>Price: {{item.product.price}}</p>
 <div>
