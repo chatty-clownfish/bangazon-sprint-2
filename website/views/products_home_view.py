@@ -9,7 +9,8 @@ def productHomeView(request):
         selected_products = '''
                             SELECT * 
                             FROM website_product 
-                            WHERE website_product.productType_id = %s 
+                            WHERE website_product.productType_id = %s
+                            and website_product.deletedOn is NULL
                             LIMIT 3
                             '''
 
