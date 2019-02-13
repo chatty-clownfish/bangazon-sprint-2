@@ -96,9 +96,7 @@ class Order(models.Model):
     product = models.ManyToManyField(Product, blank=True, through='ProductOrder')
     deletedOn = models.DateField(default = None, null=True)
 
-    def __str__(self):
-        ''' returns a string representation of the model '''
-        return self.id
+
 
 # Product Order
 

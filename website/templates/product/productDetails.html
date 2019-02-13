@@ -11,12 +11,11 @@
     ${{product_details.price}}</p>
     <div>
         <div class="d-flex justify-content-center mb-3">
-            <a class="btn btn-success btn-lg mr-2" href="#" role="button">add to your order</a>
+            <a class="btn btn-success btn-lg mr-2" href="{% url 'website:addProduct' product_details.id %}" role="button">add to your order</a>
         </div>
     </div>
-    <p class="lead text-center mt-4"> Only {{product_details.quantity}} remaining!
-
-</div>
+        <p class="lead text-center mt-4"> Only {{product_details.quantity}} remaining!
+    </div>
 
 {%endblock%}
 

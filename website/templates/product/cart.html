@@ -1,20 +1,21 @@
 {% extends 'base.html'  %}
 {% block content %}
 <h1> Shopping Cart</h1>
-{% for order in orders %}
-{% if order.deletedOn is None %}
-{% for item in cart_items %}
-{% if item.deletedOn is None %}
-<a><h3>Item: {{item.product.title}}</h3></a>
-<p>Price: {{item.product.price}}</p>
-<div>
-    <form action="{% url 'website:cart_views' order.id item.product.id %}" method='post'>
-        {% csrf_token %}
-      <input type="submit" value="Delete">
-    </form>
-</div>
+
+{% if orders.deletedOn is None %}
+    {% for item in cart_items %}
+        {% if item.deletedOn is None %}
+            <a><h3>Item: {{item.product.title}}</h3></a>
+            <p>Price: {{item.product.price}}</p>
+
+            <div>
+                <form action="{% url 'website:cart_views' order_id=orders.id product_id=item.product.id %}" method='post'>
+                {% csrf_token %}
+                <input type="submit" value="Delete">
+                </form>
+            </div>
+        {% endif %}
+    {% endfor %}
+
 {% endif %}
-{% endfor %}
-{% endif %}
-{% endfor %}
 {% endblock %}
