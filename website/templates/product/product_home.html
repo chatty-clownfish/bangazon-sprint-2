@@ -5,7 +5,7 @@
         {% for type in product_type %}
             <div class="d-flex justify-content-center">
                 <div class="card border-dark text-dark m-5" style="width:80%">
-                    <h2 class="card-header text-center">{{type.name}} ({{type.product_set.all|length}})</h2>
+                    <h2 class="card-header text-center">{{type.name}}({{type.pCount}})</h2>
                     <div class="card-body">
                         {% for products in list_of_products %}    
                             {% for product in products %}
