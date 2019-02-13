@@ -6,7 +6,9 @@ from django.contrib.auth.decorators import login_required
 from website.models import ProductOrder, Order
 import datetime
 from django.db import connection
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def list_cart(request):
     user_id = request.user.id
     orders = Order.objects.raw(''' SELECT website_order.id FROM website_order
