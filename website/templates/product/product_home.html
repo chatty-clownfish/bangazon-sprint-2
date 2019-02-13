@@ -7,7 +7,7 @@
                 <div class="card border-dark text-dark m-4" style="width:80%">
                     <h2 class="card-header text-center">{{type.name}} ({{type.product_set.all|length}})</h2>
                     <div class="card-body">
-                    {% for products in list_of_products %}    
+                    {% for products in list_of_products %}
                         {% for product in products %}
                             {% if product.productType_id == type.id %}
                                 <div class="d-flex justify-content-center">

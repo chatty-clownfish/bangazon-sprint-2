@@ -7,7 +7,7 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-  
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto mr-5">
         <li class="nav-item mr-2">
@@ -20,7 +20,7 @@
             <a class="nav-link" href="{% url 'website:profile' %}">My Profile</a>
         </li>
         <li class="nav-item mr-2">
-          <a class="nav-link" href="#"><img src="{% static 'website/images/cart_icon.png' %}" width="20px" alt="Cart"></a>
+          <a class="nav-link" href="{% url 'website:cart' %}"><img src="{% static 'website/images/cart_icon.png' %}" width="20px" alt="Cart"></a>
         </li>
         {% if user.is_authenticated %}
         <li class="nav-item mr-1 ml-4">

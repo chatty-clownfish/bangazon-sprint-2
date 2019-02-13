@@ -7,9 +7,9 @@ def productHomeView(request):
         product_type = ProductType.objects.raw('SELECT * FROM website_producttype')
         all_products = Product.objects.raw('SELECT * FROM website_product')
         selected_products = '''
-                            SELECT * 
-                            FROM website_product 
-                            WHERE website_product.productType_id = %s 
+                            SELECT *
+                            FROM website_product
+                            WHERE website_product.productType_id = %s
                             LIMIT 3
                             '''
 
@@ -17,7 +17,8 @@ def productHomeView(request):
 
         for taco in product_type:
             limited_taco = Product.objects.raw(selected_products, [taco.id,])
-            list_of_products.append(limited_taco)
+            if taco.deletedOn == None:
+                list_of_products.append(limited_taco)
 
 
     except Product.DoesNotExist:

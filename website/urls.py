@@ -2,6 +2,7 @@ from django.conf.urls import url
 from django.urls import path
 from . import views
 from .views.product_detail_views import product_details
+from .views.cart_views import delete_cart
 from .views.deleteProduct import deleteProduct
 
 app_name = "website"
@@ -17,7 +18,7 @@ urlpatterns = [
     path('home/', views.productHomeView, name='product_home'),
     path('producttype/<int:pk>/', views.products_by_type, name='products_by_type'),
     path('products/<int:id>/', product_details, name='product_detail'),
+    path('cart/', views.list_cart, name='cart'),
+    path('cart_views/<int:order_id>/<int:product_id>', views.delete_cart, name='cart_views'),
     path('deleteProduct/<int:product_id>', views.deleteProduct, name='deleteProduct'),
-    # url(r'^cart$', views.list_cart, name='cart'),
-
     ]
