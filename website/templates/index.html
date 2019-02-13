@@ -8,19 +8,6 @@
   </head>
   {%block content%}
   <body>
-    {%comment%}
-    <h1>Welcome to Bangazon!</h1>
-    {% if user.is_authenticated %}
-    <h1>Bangazon says... hello {{ user.username }}!</h1>
-    <a href="{% url 'website:logout' %}">Logout</a>
-    {% else %}
-    <h1>Bangazon says...</h1>
-    <div><a href="{% url 'website:register' %}">Register</a></div>
-    <div><a href="{% url 'website:login' %}">Login</a></div>
-    {% endif %}
-    {%endcomment%}
-
-
     <div class="jumbotron m-5">
         <h1 class="display-4 text-center">Welcome to Bangazon!</h1>
         <hr class="m-5">
