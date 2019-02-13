@@ -11,11 +11,17 @@
             <div>
                 <form action="{% url 'website:cart_views' order_id=orders.id product_id=item.product.id %}" method='post'>
                 {% csrf_token %}
-                <input type="submit" value="Delete">
+                <input type="submit" value="Remove Item">
                 </form>
             </div>
+
         {% endif %}
     {% endfor %}
-
+    <div>
+            <form action="{% url 'website:deleteAllCart' %}" method='post'>
+            {% csrf_token %}
+            <input type="submit" value="Clear Cart">
+            </form>
+        </div>
 {% endif %}
 {% endblock %}
