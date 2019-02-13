@@ -4,6 +4,25 @@
 
 {%block content%}
 <h1>{{product_details.name}}</h1>
+<div class="jumbotron m-5">
+    <h2 class="display-4 text-center">{{product_details.title}}</h2>
+    <hr class="m-5">
+    <p class="lead text-center mb-4">{{product_details.description}}<br />
+    ${{product_details.price}}</p>
+    <div>
+        <div class="d-flex justify-content-center mb-3">
+            <a class="btn btn-primary btn-lg mr-2" href="#" role="button">add to your order</a>
+        </div>
+    </div>
+    <p class="lead text-center mt-4"> Only {{product_details.quantity}} remaining!
+
+</div>
+
+{%endblock%}
+
+
+{%comment%}
+    <h1>{{product_details.name}}</h1>
 <h2>{{product_details.title}}</h2>
 <p> Price: {{product_details.price}}</p>
 <p> quantity: {{product_details.quantity}}</p>
@@ -13,5 +32,4 @@
       <input type="submit" value="add to order">
     </form>
 </div>
-
-{%endblock%}
+{%endcomment%}
