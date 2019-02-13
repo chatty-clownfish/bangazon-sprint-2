@@ -37,9 +37,10 @@ def profileList(request):
                 print("CUSTOMER ID****", customerId)
                 sql = PaymentType.objects.raw('''SELECT * FROM website_paymenttype as p
                                                 WHERE p.customer_id == %s
-                                                ''', [customerId])[0]
-                print("SQLLLLLL", sql)
-                print(sql.accountNumber)
+                                                ''', [customerId])
+                sql_list = list(sql)
+                print("SQLLLLLL", sql_list.accountNumber)
+                print(sql_list.accountNumber)
             except:
                 sql = ""                                         
         except connection.OperationalError as err:
@@ -47,7 +48,7 @@ def profileList(request):
     
     print("CHECK THIS:", profile)
     
-    context = {"profile": profile, "sql":sql}
+    context = {"profile": profile, "sql":sql_list}
     
     return render(request, 'profile/list.html', context)
 

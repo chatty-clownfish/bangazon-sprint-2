@@ -13,9 +13,11 @@ def list_cart(request):
     user_id = request.user.id
     orders = Order.objects.raw(''' SELECT website_order.id FROM website_order
                                 Where website_order.customer_id = %s
-                                ''', [user_id])
+                                ''', [user_id])[0]
     cart_items = ProductOrder.objects.raw('''Select * FROM website_productorder
-                                            Where order_id =%s''', (user_id, ))
+                                            Where order_id =%s''', [orders.id])
+    print("ORDERRSSS", orders)
+    print("CART ITEMSSS", cart_items)
     context = {'orders' : orders , 'cart_items' : cart_items }
 
     return render(request, "product/cart.html" ,context)
