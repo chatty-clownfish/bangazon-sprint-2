@@ -2,7 +2,39 @@
 
 {% block content %}
 
-    <div class="producttype_container">
+
+        <div class="d-flex justify-content-center mb-5">
+        <h1>{{ type.name }}</h1><br />
+        </div>
+        <div class="d-flex justify-content-center">
+        {% for product in prod %}
+        <a href="{% url 'website:product_detail' product.id %}" class="text-dark">
+            <div class="card border-dark mb-3 m-4" style="width: 18rem;">
+                <div class="card-header font-weight-bold text-center text-black">{{ product.title }}</div>
+                <div class="card-body">
+                    <p class="card-text p-2">${{ product.price }}<br />
+                    {{ product.quantity }} left in stock</p>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+        </div>
+
+
+{% endblock %}
+
+
+<div class="card border-dark mb-3" style="max-width: 18rem;">
+        <div class="card-header">Header</div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">Dark card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+
+
+{%comment}
+<div class="producttype_container">
         <h1>{{ type.name }}</h1><br />
         {% for product in prod %}
         <h5><a href="{% url 'website:product_detail' product.id %}">{{ product.title }}</a></h5>
@@ -10,5 +42,4 @@
         {{ product.quantity }} left in stock</p>
         {% endfor %}
     </div>
-
-{% endblock %}
+{%endcomment}
