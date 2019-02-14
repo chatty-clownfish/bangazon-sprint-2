@@ -3,6 +3,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from website.models import Product
+from website.models import Order
+from django.db import connection
+
 
 
 
@@ -37,5 +40,5 @@ def add_product_to_cart(request, product_details):
                             Values(NULL, %s, %s)''', [website_order_id.id, product_details])
         except IndexError:
             raise Http404("This product type does not exist")
-
     return HttpResponseRedirect(reverse('website:cart'))
+
