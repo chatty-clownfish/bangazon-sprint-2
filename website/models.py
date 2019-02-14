@@ -128,4 +128,3 @@ class ProductOrder(models.Model):
     def __str__(self):
         ''' returns a string representation of the model '''
         return self.order, self.product
-

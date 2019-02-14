@@ -5,12 +5,15 @@ from ..models import Product, ProductType
 def productHomeView(request):
     try:
 
+        '''
+        This query is retrieving the number of products available in each type. It is elimiating those products that have been soft deleted.
+        '''
+
         sql = '''
         SELECT pt.id, COUNT(p.id) as prodCount, pt.name
         FROM website_producttype pt
         JOIN website_product p on p.productType_id = pt.id
         WHERE p.deletedOn is null
-        
         GROUP BY pt.id
         '''
         product_count = ProductType.objects.raw(sql)
