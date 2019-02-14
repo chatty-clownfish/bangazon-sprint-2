@@ -1,21 +1,41 @@
 {% extends 'base.html'  %}
 {% block content %}
+
+<div class="d-flex justify-content-center mb-4">
 <h1> Shopping Cart</h1>
+</div>
+
+<div class="d-flex justify-content-center flex-wrap">
 
 {% if orders.deletedOn is None %}
     {% for item in cart_items %}
         {% if item.deletedOn is None %}
-            <a><h3>Item: {{item.product.title}}</h3></a>
-            <p>Price: {{item.product.price}}</p>
+        <div class="card shadow-sm rounded m-4" style="width: 18rem;">
+            <a class="text-dark" href="{% url 'website:product_detail' item.product.id %}"><h4 class="card-header font-weight-bold text-center text-black">{{item.product.title}}</h4></a>
 
-            <div>
-                <form action="{% url 'website:cart_views' order_id=orders.id product_id=item.product.id %}" method='post'>
+            <div class="card-body">
+                <div class="d-flex justify-content-center">
+                    <p>${{item.product.price}}</p>
+                </div>
                 {% csrf_token %}
-                <input type="submit" value="Delete">
-                </form>
+                <div class="d-flex justify-content-center">
+                    <a href="{% url 'website:cart_views' order_id=orders.id product_id=item.product.id %}" class="btn btn-sm btn-danger mt-2" role="button">Delete</a>
+                </div>
             </div>
+        </div>
         {% endif %}
     {% endfor %}
-
 {% endif %}
+
+</div>
+
 {% endblock %}
+
+
+<!-- old code snippet-->
+{%comment%}
+<form action="{% url 'website:cart_views' order_id=orders.id product_id=item.product.id %}" method='post'>
+{% csrf_token %}
+<input type="submit" value="Delete">
+</form>
+{%endcomment%}

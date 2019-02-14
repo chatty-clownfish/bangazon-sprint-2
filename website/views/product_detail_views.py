@@ -1,6 +1,7 @@
 
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from website.models import Product
 from website.models import Order
@@ -19,7 +20,7 @@ def product_details(request,id ):
     context = {'product_details' : product_details , 'user_id' : user_id}
     return render(request, 'product/productDetails.html', context)
 
-
+@login_required
 def add_product_to_cart(request, product_details):
     user_id = request.user.id
     website_order_id = Order.objects.raw('''select * from website_order
