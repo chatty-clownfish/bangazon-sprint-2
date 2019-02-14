@@ -8,16 +8,17 @@
 <div class="jumbotron m-5">
     <h2 class="display-4 text-center">{{product_details.title}}</h2>
     <hr class="m-5">
-    <p class="lead text-center mb-4">{{product_details.description}}<br />
-    ${{product_details.price}}</p>
-    <h5 class="container center">You are the seller of this product.</h5>
+    <p class="lead text-center mb-4">Description: {{product_details.description}}<br />
+        Price: ${{product_details.price}}</p>
+        <p class="lead text-center mt-4"> Quantity left: {{product_details.quantity}}</p>
+            <h5 class="lead text-center font-weight-bold">You are the seller of this product.</h5>
 {% else %}
 <h1>{{product_details.name}}</h1>
 <div class="jumbotron m-5">
     <h2 class="display-4 text-center">{{product_details.title}}</h2>
     <hr class="m-5">
-    <p class="lead text-center mb-4">{{product_details.description}}<br />
-    ${{product_details.price}}</p>
+    <p class="lead text-center mb-4">Description: {{product_details.description}}<br />
+    Price: ${{product_details.price}}</p>
     <div>
         <div class="d-flex justify-content-center mb-3">
             <a class="btn btn-success btn-lg mr-2" href="{% url 'website:addProduct' product_details.id %}" role="button">add to your order</a>
