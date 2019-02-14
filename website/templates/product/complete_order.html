@@ -1,0 +1,18 @@
+{% extends 'base.html'  %}
+{% block content %}
+
+<h2 class="mb-2 card-header text-center">Please Select a Payment</h2>
+<h6 class="mb-5 text-center">You can add a new payment method by clicking 'My Profile' above</h6>
+{% for payment in sql %}
+<form action="{% url 'website:selectPayment' %}">
+    {% csrf_token %}
+    <input type="radio" name="finish" value={{payment.id}}>Payment Name: {{payment.name}}   Account Number: {{payment.accountNumber}}</input><br><br>
+
+    <br>
+    <input type="submit" value="Submit">
+</form> 
+
+    <!-- there will be a button to link to the add_payment page -->
+    {% endfor %}
+
+    {% endblock content %}
