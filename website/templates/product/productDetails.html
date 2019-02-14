@@ -24,10 +24,10 @@
             <a class="btn btn-success btn-lg mr-2" href="{% url 'website:addProduct' product_details.id %}" role="button">add to your order</a>
         </div>
     </div>
-    <p class="lead text-center mt-4"> Only {{product_details.quantity}} remaining!
-    </div>
-    {% endif %}
 
+    <p class="lead text-center mt-4"> Only {{product_details_quantity_id.pCount}} remaining!
+    </div>
+{% endif %} 
 {% endblock %}
 
 <!-- below should be the correct url once a cart exists -->

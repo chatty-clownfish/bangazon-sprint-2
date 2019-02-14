@@ -11,3 +11,4 @@ from .cart_views import selectPayment
 from .product_detail_views import add_product_to_cart
 from .deleteProduct import deleteProduct
 from .product_type_view import products_by_type
+from .cart_views import delete_all_cart

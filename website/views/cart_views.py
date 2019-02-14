@@ -35,12 +35,33 @@ def delete_cart(request, order_id, product_id):
 
     return HttpResponseRedirect(reverse('website:cart'))
 
+@login_required
+def delete_all_cart(request):
+# query searches for order that doesnt have delete or payment type FIX AFTER REMIGRATE!!!
+        user = request.user.id
+        date = datetime.date.today()
+        order = Order.objects.raw('''Select * from website_order
+                                Where website_order.customer_id = %s
+                                and website_order.deletedOn is NULL''', [user])[0]
+
+        items = ProductOrder.objects.raw('''select * from website_productorder
+                                        Where order_id = %s''', [order.id])
+
+        for item in items:
+            item.deletedOn = date
+            item.save()
+
+        return HttpResponseRedirect(reverse('website:cart'))
+
+
+
+# needs payment type to equal null after remigration
 def completeOrder(request):
     customerId = request.user.customer.id
-    
+
     sql = PaymentType.objects.raw('''SELECT * FROM website_paymenttype as p
                                     WHERE p.customer_id == %s''', [customerId])
-                
+
     sql_list = list(sql)
 
     context = {"sql":sql_list}

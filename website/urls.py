@@ -2,7 +2,7 @@ from django.conf.urls import url
 from django.urls import path
 from . import views
 from .views.product_detail_views import product_details
-from .views.cart_views import delete_cart
+from .views.cart_views import delete_cart, delete_all_cart
 from .views.deleteProduct import deleteProduct
 from .views.product_detail_views import add_product_to_cart
 
@@ -23,6 +23,7 @@ urlpatterns = [
     path('cart_views/<int:order_id>/<int:product_id>', views.delete_cart, name='cart_views'),
     path('deleteProduct/<int:product_id>', views.deleteProduct, name='deleteProduct'),
     path('addProduct/<int:product_details>', views.add_product_to_cart, name='addProduct'),
+    path('deletecart', views.delete_all_cart, name='deleteAllCart'),
     path('cart/completeorder/', views.completeOrder, name='completeOrder'),
     path('cart/selectpayment/', views.selectPayment, name='selectPayment')
     ]
