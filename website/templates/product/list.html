@@ -5,22 +5,49 @@
   <head>
     <meta charset="utf-8">
     <title>Bangazon</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'website/index.css' %}" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css">
   </head>
   {% block content %}
   <body>
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center mb-4">
         <h1>My Products</h1>
     </div>
 
-    <ol>
-    {% for product in products %}
-    {% if product.deletedOn is None %}
-        <li><a href="{% url 'website:product_detail' product.id %}">{{ product.title }}</a> 
-            <a href="{% url 'website:deleteProduct' product.id%}">(DELETE)</a>   </li>
-    {% endif %}
-    {% endfor %}
-    </ol>
+    <div class="d-flex justify-content-center flex-wrap">
+        {% for product in products %}
+            {% if product.deletedOn is None %}
+                    <div class="card border-dark mb-3 m-4" style="width: 18rem;">
+                        <a href="{% url 'website:product_detail' product.id %}" class="text-dark">
+                            <h4 class="card-header font-weight-bold text-center text-black pt-4 pb-4">
+                                {{ product.title }}
+                            </h4>
+                        </a>
+                        <div class="card-body d-flex justify-content-center">
+                            <a href="{% url 'website:deleteProduct' product.id%}" class="btn btn-sm btn-danger mt-2" role="button">Delete</a>
+                        </div>
+                    </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+
   </body>
   {% endblock %}
 </html>
 
+
+
+
+
+
+    <!-- <ol>
+    {% for product in products %}
+    {% if product.deletedOn is None %}
+        <li>
+            <a href="{% url 'website:product_detail' product.id %}">{{ product.title }}</a> 
+            <a href="{% url 'website:deleteProduct' product.id%}">(DELETE)</a>
+        </li>
+    {% endif %}
+    {% endfor %}
+    </ol> -->

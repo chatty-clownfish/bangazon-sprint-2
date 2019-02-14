@@ -10,9 +10,13 @@ def productHomeView(request):
         FROM website_producttype pt
         JOIN website_product p on p.productType_id = pt.id
         WHERE p.deletedOn is null
-        AND pt.id = %s
+        AND pt.id = 1
         GROUP BY pt.id
-        ''', [productType_id])[0]
+        ''')
+
+        # AND pt.id = %s
+        # GROUP BY pt.id
+        # ''', [productType_id])[0]
 
         product_type = ProductType.objects.raw('SELECT * FROM website_producttype')
         selected_products = '''
@@ -39,6 +43,8 @@ def productHomeView(request):
 
 
 
+
+        
 # def productHomeView(request):
 #     try:
 #         product_type = ProductType.objects.raw('SELECT * FROM website_producttype')
