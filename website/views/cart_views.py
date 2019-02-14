@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.template import RequestContext
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from website.models import ProductOrder, Order
+from website.models import ProductOrder, Order, PaymentType
 import datetime
 from django.db import connection
 from django.contrib.auth.decorators import login_required
@@ -56,3 +56,16 @@ def delete_all_cart(request):
 
 
 # needs payment type to equal null after remigration
+def completeOrder(request):
+    customerId = request.user.customer.id
+
+    sql = PaymentType.objects.raw('''SELECT * FROM website_paymenttype as p
+                                    WHERE p.customer_id == %s''', [customerId])
+
+    sql_list = list(sql)
+
+    context = {"sql":sql_list}
+    return render(request, "product/complete_order.html", context)
+
+def selectPayment(request):
+    return render(request, "product/thankyou.html")
