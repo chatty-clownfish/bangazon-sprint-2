@@ -16,7 +16,15 @@ from django.db import connection
 def product_details(request,id ):
     user_id = request.user.id
     product_details = get_object_or_404(Product, pk=id)
-    context = {'product_details' : product_details , 'user_id' : user_id}
+    product_details_quantity = '''
+                                SELECT p.id, p.title, (p.quantity - COUNT(po.product_id)) as pCount
+                                FROM website_product p
+                                JOIN website_productorder po on po.product_id = p.id
+                                JOIN website_order o on o.id = po.order_id
+                                WHERE p.id = %s
+                               '''
+    product_details_quantity_id = Product.objects.raw(product_details_quantity, [id,])[0]
+    context = {'product_details' : product_details , 'user_id' : user_id, 'product_details_quantity_id': product_details_quantity_id}
     return render(request, 'product/productDetails.html', context)
 
 
@@ -33,5 +41,5 @@ def add_product_to_cart(request, product_details):
                             Values(NULL, %s, %s)''', [website_order_id.id, product_details])
         except IndexError:
             raise Http404("This product type does not exist")
-
     return HttpResponseRedirect(reverse('website:cart'))
+
