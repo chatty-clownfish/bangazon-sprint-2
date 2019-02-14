@@ -14,10 +14,6 @@ def productHomeView(request):
         GROUP BY pt.id
         ''')
 
-        # AND pt.id = %s
-        # GROUP BY pt.id
-        # ''', [productType_id])[0]
-
         product_type = ProductType.objects.raw('SELECT * FROM website_producttype')
         selected_products = '''
                             SELECT * 
@@ -42,9 +38,6 @@ def productHomeView(request):
 
 
 
-
-
-        
 # def productHomeView(request):
 #     try:
 #         product_type = ProductType.objects.raw('SELECT * FROM website_producttype')

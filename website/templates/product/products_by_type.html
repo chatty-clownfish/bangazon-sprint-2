@@ -10,7 +10,7 @@
                     {% for product in prod %}
                         {% if product.deletedOn == None %}
                         <a href="{% url 'website:product_detail' product.id %}" class="text-dark">
-                            <div class="card border-dark mb-3 m-4" style="width: 18rem;">
+                            <div class="card shadow-sm mb-3 m-4" style="width: 18rem;">
                                 <div class="card-header font-weight-bold text-center text-black">{{ product.title }}</div>
                                 <div class="card-body">
                                     <p class="card-text p-2">${{ product.price }}<br />

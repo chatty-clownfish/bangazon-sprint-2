@@ -4,7 +4,7 @@
 
         {% for type in product_type %}
             <div class="d-flex justify-content-center">
-                <div class="card border-dark text-dark m-5" style="width:80%">
+                <div class="card shadow-sm text-dark m-5" style="width:80%">
                     <h2 class="card-header text-center">{{type.name}}
                         {% for product in product_count %}
                         ({{product.prodCount}})

@@ -17,7 +17,7 @@
     <div class="d-flex justify-content-center flex-wrap">
         {% for product in products %}
             {% if product.deletedOn is None %}
-                    <div class="card border-dark mb-3 m-4" style="width: 18rem;">
+                    <div class="card shadow-sm rounded m-4" style="width: 18rem;">
                         <a href="{% url 'website:product_detail' product.id %}" class="text-dark">
                             <h4 class="card-header font-weight-bold text-center text-black pt-4 pb-4">
                                 {{ product.title }}
