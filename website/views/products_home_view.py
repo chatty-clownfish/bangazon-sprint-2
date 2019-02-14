@@ -5,13 +5,14 @@ from ..models import Product, ProductType
 def productHomeView(request):
     try:
 
-        sql = '''
-            SELECT pt.name as typeName, p.title as prodTitle, COUNT(p.id) as pCount, p.id, pt.id
-            FROM website_producttype pt
-            JOIN website_product p on p.productType_id = pt.id
-            WHERE pt.id = %s
-            and p.deletedOn is null
-            '''
+        product_count = ProductType.objects.raw('''
+        SELECT COUNT(p.id) as prodCount, pt.id, pt.name, p.id
+        FROM website_producttype pt
+        JOIN website_product p on p.productType_id = pt.id
+        WHERE p.deletedOn is null
+        AND pt.id = %s
+        GROUP BY pt.id
+        ''', [productType_id])[0]
 
         product_type = ProductType.objects.raw('SELECT * FROM website_producttype')
         selected_products = '''
@@ -32,7 +33,7 @@ def productHomeView(request):
     except Product.DoesNotExist:
         raise Http404("Product does not exist")
 
-    context = {'product_type': product_type, 'list_of_products':list_of_products}
+    context = {'product_type': product_type, 'list_of_products': list_of_products, 'product_count': product_count,}
     return render(request, 'product/product_home.html', context)
 
 
