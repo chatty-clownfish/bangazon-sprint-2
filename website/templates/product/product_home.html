@@ -1,14 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+<div><h2>total number of products</h2>
+{% for count in product_count %}
+<p>{{count.name}} ({{count.prodCount}})</p>
+{% endfor %}
+</div>
         {% for type in product_type %}
             <div class="d-flex justify-content-center">
                 <div class="card shadow-sm text-dark m-5" style="width:80%">
                     <h2 class="card-header text-center">{{type.name}}
-                        {% for product in product_count %}
-                        ({{product.prodCount}})
-                        {% endfor %}
                     </h2>
                     <div class="card-body">
                         {% for products in list_of_products %}    

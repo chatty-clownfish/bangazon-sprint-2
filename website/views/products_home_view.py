@@ -5,14 +5,16 @@ from ..models import Product, ProductType
 def productHomeView(request):
     try:
 
-        product_count = ProductType.objects.raw('''
-        SELECT COUNT(p.id) as prodCount, pt.id, pt.name, p.id
+        sql = '''
+        SELECT pt.id, COUNT(p.id) as prodCount, pt.name
         FROM website_producttype pt
         JOIN website_product p on p.productType_id = pt.id
         WHERE p.deletedOn is null
-        AND pt.id = 1
+        
         GROUP BY pt.id
-        ''')
+        '''
+        product_count = ProductType.objects.raw(sql)
+
 
         product_type = ProductType.objects.raw('SELECT * FROM website_producttype')
         selected_products = '''
@@ -35,6 +37,9 @@ def productHomeView(request):
 
     context = {'product_type': product_type, 'list_of_products': list_of_products, 'product_count': product_count,}
     return render(request, 'product/product_home.html', context)
+
+
+
 
 
 
