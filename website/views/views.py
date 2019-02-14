@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.template import RequestContext
 
 from website.forms import UserForm, ProductForm, CustomerForm
-from website.models import Product
+from website.models import Product, Order, PaymentType
 
 def index(request):
     template_name = 'index.html'
@@ -44,6 +44,9 @@ def register(request):
 
             # Update our variable to tell the template registration was successful.
             registered = True
+            payment = PaymentType.objects.create(name= "southwest", accountNumber = "12355346", customer= customer)
+            user_id = user.id
+            Order.objects.create(isCompleted = 0, customer= customer, paymentType = payment)
 
         return login_user(request)
 
