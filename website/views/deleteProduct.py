@@ -4,8 +4,7 @@ from django.db import connection
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 import datetime
-
-from ..models import Product, ProductType
+from ..models import Product, ProductType, Order
 
 @login_required
 
@@ -22,7 +21,6 @@ def deleteProduct(request, product_id):
 
     except Product.DoesNotExist:
         raise Http404("Product does not exist")
-
 
 
 
