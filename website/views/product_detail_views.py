@@ -22,6 +22,7 @@ def product_details(request,id ):
 
 @login_required
 def add_product_to_cart(request, product_details):
+    
     user_id = request.user.id
     website_order_id = Order.objects.raw('''select * from website_order
                                             Where deletedOn is null and customer_id = %s''', [user_id])[0]

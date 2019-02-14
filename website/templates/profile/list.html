@@ -2,9 +2,13 @@
 
 {% block content %}
 
+<<<<<<< HEAD
 <div class="d-flex justify-content-center mb-5">
     <h1>{{profile.first_name}}'s Profile</h1>
 </div>
+=======
+<h1 class="mb-5">Hello, {{profile.first_name}}. Welcome to your profile</h1>
+>>>>>>> cc5ddff2a274c172fdc031decc0ae68d6a5068a3
 
 <div>
     <div class="d-flex justify-content-center mt-3">
@@ -19,6 +23,7 @@
         </div>
     </div>
 
+<<<<<<< HEAD
     <div>
         <h3 class="font-weight-bold text-center text-black pt-2 pb-3">My Payment Options</h3>
         <!-- Will be coming from the paymenttype table -->
@@ -45,3 +50,20 @@
 
 
 {% endblock content %}
+=======
+<h3>Payment Options</h3>
+<!-- Will be coming from the paymenttype table -->
+{% if not sql.accountNumber %}
+    {% for payment in sql %}
+    <ul>
+        <li>Payment Name: {{payment.name}}</li>
+        <li>Account Number: {{payment.accountNumber}}</li>
+    </ul>
+    <!-- there will be a button to link to the add_payment page -->
+    {% endfor %}
+    <a href="{% url 'website:add_payment' %}"><button type="button" class="btn btn-success mt-3">Add Payment</button></a>
+{% else %}
+    <a href="{% url 'website:add_payment' %}"><button type="button" class="btn btn-success mt-3">Add Payment</button></a>
+{% endif %}
+{% endblock content %}
+>>>>>>> cc5ddff2a274c172fdc031decc0ae68d6a5068a3
