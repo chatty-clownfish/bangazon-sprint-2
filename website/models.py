@@ -58,6 +58,18 @@ class Product(models.Model):
     def __str__(self):
         ''' returns a string representation of the model '''
         return self.title
+    
+    @property
+    def prod_count(self):
+        sql = '''
+        SELECT pt.id, COUNT(p.id) as prodCount, pt.name, p.id
+        FROM website_producttype pt
+        JOIN website_product p on p.productType_id = pt.id
+        WHERE p.deletedOn is null
+        GROUP BY pt.id
+        '''
+        product_count = ProductType.objects.raw(sql)
+        return product_count
 
 
 # Payment Type Model
@@ -116,4 +128,3 @@ class ProductOrder(models.Model):
     def __str__(self):
         ''' returns a string representation of the model '''
         return self.order, self.product
-

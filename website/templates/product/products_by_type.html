@@ -1,16 +1,14 @@
 {% extends 'base.html'  %}
 
 {% block content %}
-
-
-        <div class="d-flex justify-content-center mb-5">
-            <h1>{{ type.name }}</h1><br />
-            </div>
-            <div class="d-flex justify-content-center">
+    <div>
+        <h1 class="text-center">{{ type.name }}</h1><br />
+        </div>
+            <div class="d-flex justify-content-center flex-wrap">
                 {% for product in prod %}
-                {% if product.deletedOn == None %}
+                    {% if product.deletedOn == None %}
                     <a href="{% url 'website:product_detail' product.id %}" class="text-dark">
-                        <div class="card border-dark mb-3 m-4" style="width: 18rem;">
+                        <div class="card shadow-sm mb-3 m-4" style="width: 18rem;">
                             <div class="card-header font-weight-bold text-center text-black">{{ product.title }}</div>
                             <div class="card-body">
                                 <p class="card-text p-2">${{ product.price }}<br />
@@ -22,6 +20,5 @@
                 {% endfor %}
             </div>
         </div>
-
-
+    </div>
 {% endblock %}

@@ -107,6 +107,3 @@ def list_products(request):
 where customer_id = %s ''', [user_id] )
     template_name = 'product/list.html'
     return render(request, template_name, {'products': all_products})
-
-
-
